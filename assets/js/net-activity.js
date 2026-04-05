@@ -1,15 +1,15 @@
 /**
  * Network Activity Monitor
- * Lightweight server activity widget
- * Auto-refreshes every 5 minutes
+ * Fetches real server activity data
+ * Auto-refreshes every 60 seconds
  */
 
 (function() {
     const MOUNT = document.getElementById('net-activity-mount');
     if (!MOUNT) return;
 
-    const DATA_URL = '/assets/data/widget-data.json';
-    const REFRESH_INTERVAL = 300000; // 5 min
+    const DATA_URL = '/api/stats';
+    const REFRESH_INTERVAL = 60000; // 60s
 
     function createWidget() {
         const el = document.createElement('div');
