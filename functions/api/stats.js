@@ -1,5 +1,5 @@
 export async function onRequestGet(context) {
-    const url = "http://34.76.16.158:9090/widget-stats";
+    const url = "https://ben-browser-tops-chess.trycloudflare.com/widget-stats";
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error("status " + response.status);
