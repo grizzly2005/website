@@ -8,7 +8,7 @@
     const MOUNT = document.getElementById('net-activity-mount');
     if (!MOUNT) return;
 
-    const DATA_URL = 'http://34.76.16.158:9090/widget-stats';
+    const DATA_URL = '/api/stats';
     const REFRESH_INTERVAL = 60000; // 60s
 
     function createWidget() {
