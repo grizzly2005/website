@@ -9,7 +9,7 @@
  *   sudo journalctl -u cloudflared | grep "trycloudflare.com" | tail -1
  */
 
-const TUNNEL_URL = "https://golden-gentle-agricultural-wellington.trycloudflare.com";
+const TUNNEL_URL = "https://widescreen-poetry-auto-viewer.trycloudflare.com";
 
 export async function onRequestGet(context) {
     // Si le tunnel n'est pas configuré, retourner une erreur claire

@@ -126,11 +126,10 @@
             renderBars(data.daily || [0,0,0,0,0,0,0]);
             updateCount(data.connections_24h || 0);
         } catch (_) {
-            // Fallback: generate plausible static data
-            const daily = Array.from({length: 7}, () => Math.floor(Math.random() * 15) + 1);
-            const total = daily.reduce((a, b) => a + b, 0);
-            renderBars(daily);
-            updateCount(Math.floor(total / 7));
+            // API unreachable — show stale/offline, never random
+            renderBars([1,1,1,1,1,1,1]);
+            const el = document.getElementById('nw-count');
+            if (el) el.textContent = '—/24h';
         }
     }
 
