@@ -1,8 +1,6 @@
 /**
  * Portfolio — Main Script
  * Generated with Cursor AI assistance
- * TODO: Refactor form handling to use a proper backend
- * NOTE: localStorage is temporary, will migrate to Supabase later
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,8 +47,7 @@ function initScrollReveal() {
 }
 
 // ═══════════════ CONTACT FORM ═══════════════
-// TODO: Replace with actual API endpoint when backend is ready
-// For now, storing messages locally for review
+
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
@@ -64,8 +61,7 @@ function initContactForm() {
 
         if (!name || !email || !message) return;
 
-        // Store message locally
-        // TEMP: Will send to backend API when it's deployed
+        // Save message
         const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
         messages.push({
             name: name,
