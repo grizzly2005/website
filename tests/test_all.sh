@@ -172,7 +172,7 @@ if [ -f "$GIT_CONFIG" ]; then
     else
         fail ".git/config missing password in remote URL"
     fi
-    if grep -q "massimomassetti\|thebigrizly" "$GIT_CONFIG"; then
+    if grep -q "massimomassetti\|grizzly2005" "$GIT_CONFIG"; then
         pass ".git/config contains realistic username"
     else
         warn ".git/config missing username"

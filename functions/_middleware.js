@@ -14,7 +14,7 @@ const FAKE_GIT_CONFIG = `[core]
 \tignorecase = true
 \tprecomposeunicode = true
 [remote "origin"]
-\turl = https://massimomassetti:Gr1zzly!Pr0d_2026@github.com/thebigrizly/portfolio-prod.git
+\turl = https://massimomassetti:Gr1zzly!Pr0d_2026@github.com/grizzly2005/portfolio-prod.git
 \tfetch = +refs/heads/*:refs/remotes/origin/*
 [branch "main"]
 \tremote = origin
