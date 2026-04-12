@@ -156,8 +156,8 @@
                                 LLM-powered SSH research system that answers any command in real time with memory and anti-fingerprinting. Deployed on a public VPS and exposed to live internet traffic — caught Kinsing botnets and in-band prompt injection attempts via SSH. The same raw events feed both defensive and offensive training datasets through a dual-use DataRouter with 7 generators.
                             </p>
                             <div class="project-metrics">
-                                <div class="metric"><span class="metric-val">170/170</span><span class="metric-lbl">tests passing</span></div>
-                                <div class="metric"><span class="metric-val">5/5</span><span class="metric-lbl">MITRE tactics</span></div>
+                                <div class="metric"><span class="metric-val" id="hydra-m1">—</span><span class="metric-lbl" id="hydra-m1l">sessions</span></div>
+                                <div class="metric"><span class="metric-val" id="hydra-m2">—</span><span class="metric-lbl">days live</span></div>
                                 <div class="metric"><span class="metric-val">65+</span><span class="metric-lbl">built-ins</span></div>
                                 <div class="metric"><span class="metric-val">7</span><span class="metric-lbl">generators</span></div>
                             </div>
@@ -335,5 +335,50 @@
     <!-- Scripts -->
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/net-activity.js"></script>
+    <script>
+    // ═══ HYDRA live metrics ═══
+    (function () {
+        const m1 = document.getElementById('hydra-m1');
+        const m1l = document.getElementById('hydra-m1l');
+        const m2 = document.getElementById('hydra-m2');
+
+        function fmtSessions(n) {
+            if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'K+';
+            return n + '';
+        }
+
+        function fmtDays(uptime_s) {
+            const d = Math.floor(uptime_s / 86400);
+            const h = Math.floor((uptime_s % 86400) / 3600);
+            if (d > 0) return d + 'd ' + h + 'h';
+            return h + 'h';
+        }
+
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/stats?t=' + Date.now());
+                if (!res.ok) throw new Error(res.status);
+                const d = await res.json();
+                if (d.error) throw new Error(d.error);
+
+                if (m1 && d.total_sessions != null) {
+                    m1.textContent = fmtSessions(d.total_sessions);
+                    if (m1l) m1l.textContent = d.total_sessions === 1 ? 'session' : 'sessions';
+                }
+                if (m2 && d.uptime_seconds != null) {
+                    m2.textContent = fmtDays(d.uptime_seconds);
+                }
+            } catch (_) {
+                // API unreachable — show neutral placeholder, never fake numbers
+                if (m1) m1.textContent = 'live';
+                if (m1l) m1l.textContent = 'capture';
+                if (m2) m2.textContent = 'active';
+            }
+        }
+
+        loadStats();
+        setInterval(loadStats, 120000); // refresh every 2 min
+    })();
+    </script>
 </body>
 </html>

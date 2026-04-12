@@ -179,11 +179,28 @@ const S={s1:['s1a','s1b','s1c'],s2:['s2a','s2b','s2c','s2d'],s3:['s3l','s3a','s3
 function clr(){Object.values(S).flat().forEach(id=>{try{off(id)}catch(e){}})}
 
 async function play(){
+// ── Fetch live stats before starting (silent fallback) ──
+let _liveStats = {};
+try {
+  const _r = await fetch('/api/stats?t='+Date.now());
+  if (_r.ok) _liveStats = await _r.json();
+} catch(_){}
+const _totalSessions = (_liveStats.total_sessions > 0) ? _liveStats.total_sessions : 55;
+const _uptimeDays = _liveStats.uptime_seconds ? Math.floor(_liveStats.uptime_seconds/86400) : null;
+
 // S1 — Hook
 clr();await w(800);on('s1a');await w(1200);on('s1b');await w(1200);on('s1c');await w(2800);
 
 // S2 — Stats
-clr();await w(400);on('s2a');await w(600);on('s2b');await w(800);on('s2c');await w(300);countUp('ct1',55,1000);countUp('ct2',170,1500);countUp('ct3',5,800);await w(2500);on('s2d');await w(2500);
+clr();await w(400);on('s2a');await w(600);on('s2b');await w(800);on('s2c');await w(300);
+countUp('ct1',55,1000);
+countUp('ct2',_totalSessions,1500);
+// Update label with uptime if available
+if(_uptimeDays !== null){
+  const lbl=$('ct2').nextElementSibling;
+  if(lbl) lbl.textContent='sessions · '+_uptimeDays+'d live';
+}
+countUp('ct3',5,800);await w(2500);on('s2d');await w(2500);
 
 // S3 — HYDRA
 clr();await w(400);on('s3l');await w(600);on('s3a');await w(800);on('s3ar');await w(400);on('s3h');await w(1000);on('s3p');await w(1000);on('s3c');await typeText('s3t','cat /root/.aws/credentials',40);await w(1200);on('s3d');buildBars();await w(3500);
