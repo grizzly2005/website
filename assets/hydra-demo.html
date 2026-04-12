@@ -6,13 +6,15 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#08080e;font-family:'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden}
-#c{width:1080px;height:1080px;position:relative;overflow:hidden;background:#08080e}
-#c::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(99,102,241,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.04) 1px,transparent 1px);background-size:54px 54px}
+body{background:var(--demo-bg);font-family:'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden;transition:background .3s ease}
+:root{--demo-bg:#08080e;--demo-card:#0e0e18;--demo-border:#1a1a2e;--demo-text:#e2e2ea;--demo-dim:#666;--demo-dimmer:#555;--demo-dimmest:#444;--demo-darkest:#333;--demo-accent:#6366f1;--demo-grid:rgba(99,102,241,.04)}
+[data-theme="light"]{--demo-bg:#f8f8fb;--demo-card:#ffffff;--demo-border:rgba(0,0,0,0.08);--demo-text:#1a1a2e;--demo-dim:#6b6b80;--demo-dimmer:#7a7a90;--demo-dimmest:#8888a0;--demo-darkest:#aaa;--demo-accent:#6b46c1;--demo-grid:rgba(107,70,193,.06)}
+#c{width:1080px;height:1080px;position:relative;overflow:hidden;background:var(--demo-bg);transition:background .3s ease}
+#c::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--demo-grid) 1px,transparent 1px),linear-gradient(90deg,var(--demo-grid) 1px,transparent 1px);background-size:54px 54px}
 .e{position:absolute;opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
 .e.on{opacity:1;transform:translateY(0)}
 .e.f{transition:opacity .4s ease,transform .4s ease}
-.box{background:#0e0e18;border-radius:14px;padding:24px}
+.box{background:var(--demo-card);border-radius:14px;padding:24px;transition:background .3s ease}
 </style>
 </head>
 <body>
@@ -238,6 +240,57 @@ clr();await w(400);on('s8l');await w(800);on('s8f');await w(4000);on('s8e');awai
 play();
 }
 play();
+</script>
+<script>
+// Theme sync — receives theme from parent portfolio page
+(function(){
+  var colorMap = {
+    dark: {},
+    light: {
+      '#e2e2ea':'#1a1a2e', '#666':'#6b6b80', '#555':'#7a7a90',
+      '#444':'#8888a0', '#333':'#aaa', '#888':'#6b6b80',
+      '#6366f1':'#6b46c1', '#0e0e18':'#ffffff', '#0a0a14':'#f0f0f6',
+      '#1a1a2e':'rgba(0,0,0,0.08)'
+    }
+  };
+
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme','light');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+    // Remap inline style colors
+    var map = theme === 'light' ? colorMap.light : null;
+    document.querySelectorAll('[style]').forEach(function(el){
+      if (!el._origStyle) el._origStyle = el.getAttribute('style');
+      if (theme === 'dark' || !map) {
+        el.setAttribute('style', el._origStyle);
+      } else {
+        var s = el._origStyle;
+        Object.keys(map).forEach(function(from){
+          s = s.split(from).join(map[from]);
+        });
+        el.setAttribute('style', s);
+      }
+    });
+  }
+
+  // Listen for theme changes from parent
+  window.addEventListener('message', function(e){
+    if (e.data && e.data.type === 'theme-change') {
+      applyTheme(e.data.theme);
+    }
+  });
+
+  // Check parent theme on load
+  if (window.parent !== window) {
+    try {
+      var parentTheme = window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme === 'light') applyTheme('light');
+    } catch(_){}
+  }
+})();
 </script>
 </body>
 </html>
