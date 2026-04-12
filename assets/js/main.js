@@ -52,39 +52,55 @@ function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const status = document.getElementById('form-status');
+        const btn = form.querySelector('button[type="submit"]');
 
         if (!name || !email || !message) return;
 
-        // Save message
-        const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
-        messages.push({
-            name: name,
-            email: email,
-            message: message,
-            timestamp: new Date().toISOString(),
-            read: false
-        });
-        localStorage.setItem('contactMessages', JSON.stringify(messages));
-
-        // Show confirmation
-        const status = document.getElementById('form-status');
+        // Disable button during send
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
         if (status) {
-            status.textContent = '> Message sent successfully';
-            status.style.color = '#00ff88';
+            status.textContent = '';
+            status.style.color = '';
         }
 
-        form.reset();
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, message }),
+            });
 
-        // Clear status after 4s
-        setTimeout(() => {
-            if (status) status.textContent = '';
-        }, 4000);
+            const data = await res.json();
+
+            if (data.ok) {
+                if (status) {
+                    status.textContent = '> Message sent successfully';
+                    status.style.color = '#00ff88';
+                }
+                form.reset();
+            } else {
+                throw new Error(data.error || 'Send failed');
+            }
+        } catch (err) {
+            if (status) {
+                status.textContent = '> Error: ' + err.message;
+                status.style.color = '#ff3b5c';
+            }
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Send Message';
+            setTimeout(() => {
+                if (status) status.textContent = '';
+            }, 5000);
+        }
     });
 }
 
