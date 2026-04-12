@@ -93,7 +93,8 @@ body{background:#08080e;font-family:'IBM Plex Mono',monospace;display:flex;align
   <div style="font-size:16px;font-weight:600;color:#6366f1;letter-spacing:2px">DATAROUTER</div>
   <div style="font-size:13px;color:#555;margin-top:6px">classify_event()</div>
 </div></div>
-<svg class="e f" id="s5ar" style="top:0;left:0;width:1080px;height:1080px;pointer-events:none"><line x1="540" y1="295" x2="300" y2="375" stroke="#22c55e" stroke-width="2"/><line x1="540" y1="295" x2="680" y2="375" stroke="#ef4444" stroke-width="2"/><line x1="540" y1="625" x2="540" y2="680" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6 4"/></svg>
+<svg class="e f" id="s5ar" style="top:0;left:0;width:1080px;height:1080px;pointer-events:none"><line x1="540" y1="295" x2="300" y2="375" stroke="#22c55e" stroke-width="2"/><line x1="540" y1="295" x2="680" y2="375" stroke="#ef4444" stroke-width="2"/></svg>
+<svg class="e" id="s5ca" style="top:0;left:0;width:1080px;height:1080px;pointer-events:none"><line x1="540" y1="625" x2="540" y2="680" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6 4"/></svg>
 <div class="e" id="s5df" style="top:380px;left:100px;width:340px"><div class="box" style="border:1px solid #22c55e55">
   <div style="font-size:14px;font-weight:600;color:#22c55e;letter-spacing:2px;margin-bottom:10px">DEFENSIVE STREAM</div>
   <div id="s5dn" style="font-size:48px;font-weight:700;color:#22c55e">0</div>
@@ -174,7 +175,7 @@ function countUp(id,tgt,dur=1200){const el=$(id),t0=performance.now();(function 
 function typeText(id,txt,spd=45){const el=$(id);el.textContent='';let i=0;return new Promise(r=>{const iv=setInterval(()=>{el.textContent+=txt[i];i++;if(i>=txt.length){clearInterval(iv);r()}},spd)})}
 const DL=["severity","confidence","exploitability","auth_relevance","data_exposure","injection_surface","config_weakness","chain_potential"];
 function buildBars(){const c=$('s3b');c.innerHTML='';DL.forEach(d=>{const v=d==='severity'?.92:d==='exploitability'?.78:d==='data_exposure'?.85:d==='chain_potential'?.67:(.12+Math.random()*.4);const h=v>.7?0:v>.4?40:140;const r=document.createElement('div');r.style.cssText='display:flex;align-items:center;gap:8px';r.innerHTML=`<span style="font-size:12px;color:#555;width:120px;text-align:right">${d}</span><div style="flex:1;height:6px;background:#111;border-radius:3px;overflow:hidden"><div id="b-${d}" style="width:0%;height:100%;border-radius:3px;background:hsl(${h},65%,50%);transition:width 1.2s ease"></div></div><span style="font-size:12px;color:#666;width:36px">${v.toFixed(2)}</span>`;c.appendChild(r);setTimeout(()=>{document.getElementById('b-'+d).style.width=(v*100)+'%'},100)})}
-const S={s1:['s1a','s1b','s1c'],s2:['s2a','s2b','s2c','s2d'],s3:['s3l','s3a','s3ar','s3h','s3p','s3c','s3d'],s4:['s4l','s4a','s4ar','s4b','s4t','s4c','s4f'],s5:['s5l','s5d','s5r','s5ar','s5df','s5of','s5cb'],s6:['s6l','s6o1','s6o2','s6o3','s6o4'],s7:['s7l','s7s','s7b','s7c1','s7c2','s7c3','s7c4','s7g'],s8:['s8l','s8f','s8e']};
+const S={s1:['s1a','s1b','s1c'],s2:['s2a','s2b','s2c','s2d'],s3:['s3l','s3a','s3ar','s3h','s3p','s3c','s3d'],s4:['s4l','s4a','s4ar','s4b','s4t','s4c','s4f'],s5:['s5l','s5d','s5r','s5ar','s5df','s5of','s5cb','s5ca'],s6:['s6l','s6o1','s6o2','s6o3','s6o4'],s7:['s7l','s7s','s7b','s7c1','s7c2','s7c3','s7c4','s7g'],s8:['s8l','s8f','s8e']};
 function clr(){Object.values(S).flat().forEach(id=>{try{off(id)}catch(e){}})}
 
 async function play(){
@@ -182,7 +183,7 @@ async function play(){
 clr();await w(800);on('s1a');await w(1200);on('s1b');await w(1200);on('s1c');await w(2800);
 
 // S2 — Stats
-clr();await w(400);on('s2a');await w(600);on('s2b');await w(800);on('s2c');await w(300);countUp('ct1',55,1000);countUp('ct2',3508,1500);countUp('ct3',5,800);await w(2500);on('s2d');await w(2500);
+clr();await w(400);on('s2a');await w(600);on('s2b');await w(800);on('s2c');await w(300);countUp('ct1',55,1000);countUp('ct2',170,1500);countUp('ct3',5,800);await w(2500);on('s2d');await w(2500);
 
 // S3 — HYDRA
 clr();await w(400);on('s3l');await w(600);on('s3a');await w(800);on('s3ar');await w(400);on('s3h');await w(1000);on('s3p');await w(1000);on('s3c');await typeText('s3t','cat /root/.aws/credentials',40);await w(1200);on('s3d');buildBars();await w(3500);
@@ -191,7 +192,7 @@ clr();await w(400);on('s3l');await w(600);on('s3a');await w(800);on('s3ar');awai
 clr();await w(400);on('s4l');await w(600);on('s4a');await w(800);on('s4ar');await w(400);on('s4b');await w(1000);on('s4t');await w(800);on('s4c');await typeText('s4tx','POST /login — SQLi in username param',35);await w(1500);on('s4f');await w(3000);
 
 // S5 — DataRouter
-clr();await w(400);on('s5l');await w(500);on('s5d');await w(800);on('s5r');await w(1200);on('s5ar');await w(400);on('s5df');on('s5of');await w(400);countUp('s5dn',8668,1800);countUp('s5on',4910,1800);await w(2500);on('s5cb');await w(3500);
+clr();await w(400);on('s5l');await w(500);on('s5d');await w(800);on('s5r');await w(1200);on('s5ar');await w(400);on('s5df');on('s5of');await w(400);countUp('s5dn',8668,1800);countUp('s5on',4910,1800);await w(2500);on('s5cb');on('s5ca');await w(3500);
 
 // S6 — Observations
 clr();await w(400);on('s6l');await w(800);on('s6o1');await w(2500);on('s6o2');await w(2500);on('s6o3');await w(2500);on('s6o4');await w(3500);

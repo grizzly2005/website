@@ -319,6 +319,8 @@ a:hover {
 .term-line:nth-child(5) { animation-delay: 2.8s; }
 .term-line:nth-child(6) { animation-delay: 3.2s; }
 .term-line:nth-child(7) { animation-delay: 3.6s; }
+.term-line:nth-child(8) { animation-delay: 4.1s; }
+.term-line:nth-child(9) { animation-delay: 4.5s; }
 
 .term-prompt { color: var(--accent); }
 .term-cmd { color: var(--text-primary); }
