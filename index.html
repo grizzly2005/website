@@ -336,6 +336,16 @@
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/net-activity.js"></script>
     <script>
+    // ═══ Demo frame — dynamic scale ═══
+    function scaleDemoFrame() {
+        const wrap = document.querySelector('.project-demo-wrap');
+        const inner = document.querySelector('.project-demo-inner');
+        if (!wrap || !inner) return;
+        const scale = wrap.offsetWidth / 1080;
+        inner.style.transform = 'scale(' + scale + ')';
+    }
+    scaleDemoFrame();
+    window.addEventListener('resize', scaleDemoFrame);
     // ═══ HYDRA live metrics ═══
     (function () {
         const m1 = document.getElementById('hydra-m1');

@@ -16,6 +16,21 @@ body{background:#08080e;font-family:'IBM Plex Mono',monospace;display:flex;align
 </style>
 </head>
 <body>
+<script>
+function scaleCanvas(){
+  const c=document.getElementById('c');
+  if(!c)return;
+  const vw=Math.min(window.innerWidth,window.innerHeight);
+  const scale=vw/1080;
+  c.style.transform='scale('+scale+')';
+  c.style.transformOrigin='top left';
+  document.body.style.width=(1080*scale)+'px';
+  document.body.style.height=(1080*scale)+'px';
+  document.body.style.overflow='hidden';
+}
+scaleCanvas();
+window.addEventListener('resize',scaleCanvas);
+</script>
 <div id="c">
 
 <!-- ═══ S1 — HOOK ═══ -->
