@@ -47,7 +47,6 @@ function initScrollReveal() {
 }
 
 // ═══════════════ CONTACT FORM ═══════════════
-
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
@@ -104,20 +103,6 @@ function initContactForm() {
             btn.disabled = false;
             btn.textContent = 'Send Message';
             setTimeout(function() { if (status) status.textContent = ''; }, 5000);
-        }
-    });
-}
-        } catch (err) {
-            if (status) {
-                status.textContent = '> Error: ' + err.message;
-                status.style.color = '#ff3b5c';
-            }
-        } finally {
-            btn.disabled = false;
-            btn.textContent = 'Send Message';
-            setTimeout(() => {
-                if (status) status.textContent = '';
-            }, 5000);
         }
     });
 }
