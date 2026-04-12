@@ -78,7 +78,14 @@ function initContactForm() {
                 body: JSON.stringify({ name, email, message }),
             });
 
-            const data = await res.json();
+            // Handle non-JSON responses (Cloudflare error pages)
+            const text = await res.text();
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (parseErr) {
+                throw new Error('Server error (' + res.status + '). Try again later.');
+            }
 
             if (data.ok) {
                 if (status) {

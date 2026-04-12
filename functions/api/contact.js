@@ -31,7 +31,7 @@ export async function onRequestPost(context) {
     let body;
     try {
         body = await context.request.json();
-    } catch {
+    } catch (e) {
         return new Response(JSON.stringify({
             ok: false,
             error: "Invalid request body",
