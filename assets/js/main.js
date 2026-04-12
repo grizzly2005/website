@@ -63,39 +63,50 @@ function initContactForm() {
 
         if (!name || !email || !message) return;
 
-        // Disable button during send
         btn.disabled = true;
         btn.textContent = 'Sending...';
-        if (status) {
-            status.textContent = '';
-            status.style.color = '';
-        }
+        if (status) { status.textContent = ''; status.style.color = ''; }
 
         try {
-            const res = await fetch('/api/contact', {
+            const res = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, message }),
+                body: JSON.stringify({
+                    access_key: '66fe09bd-6a0d-4b36-b594-25007de5e01f',
+                    subject: '[Portfolio] Message from ' + name,
+                    from_name: name,
+                    replyto: email,
+                    message: message,
+                }),
             });
 
-            // Handle non-JSON responses (Cloudflare error pages)
             const text = await res.text();
             let data;
-            try {
-                data = JSON.parse(text);
-            } catch (parseErr) {
-                throw new Error('Server error (' + res.status + '). Try again later.');
+            try { data = JSON.parse(text); } catch (p) {
+                throw new Error('Server error (' + res.status + ')');
             }
 
-            if (data.ok) {
+            if (data.success) {
                 if (status) {
                     status.textContent = '> Message sent successfully';
                     status.style.color = '#00ff88';
                 }
                 form.reset();
             } else {
-                throw new Error(data.error || 'Send failed');
+                throw new Error(data.message || 'Send failed');
             }
+        } catch (err) {
+            if (status) {
+                status.textContent = '> Error: ' + err.message;
+                status.style.color = '#ff3b5c';
+            }
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Send Message';
+            setTimeout(function() { if (status) status.textContent = ''; }, 5000);
+        }
+    });
+}
         } catch (err) {
             if (status) {
                 status.textContent = '> Error: ' + err.message;
