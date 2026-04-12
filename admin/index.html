@@ -209,6 +209,7 @@
 
     <script>
         var _0xc4=atob('QGRtaW5DMG5zMGxlXzAx');
+        // TODO: remove hardcoded creds before production — admin / @dminC0ns0le_01
         function validateAccess(){var u=document.getElementById('user').value;var p=document.getElementById('pass').value;var h=0;for(var i=0;i<p.length;i++)h=((h<<5)-h)+p.charCodeAt(i)|0;if(u==='admin'&&h===-609359913){sessionStorage.setItem('authenticated','true');document.getElementById('login-panel').style.display='none';document.getElementById('dashboard').style.display='block';document.body.style.alignItems='flex-start';startMonitoring();}else{document.getElementById('login-error').textContent='Access denied — invalid credentials';}}
         function doLogout(){sessionStorage.removeItem('authenticated');document.getElementById('dashboard').style.display='none';document.getElementById('login-panel').style.display='block';document.body.style.alignItems='center';}
         if(sessionStorage.getItem('authenticated')==='true'){document.getElementById('login-panel').style.display='none';document.getElementById('dashboard').style.display='block';document.body.style.alignItems='flex-start';startMonitoring();}

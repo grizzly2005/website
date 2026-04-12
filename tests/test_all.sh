@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ═══════════════════════════════════════════════════════════
-# HYDRA Site Vitrine — Test Suite Complète
+# Portfolio — Test Suite — Test Suite Complète
 # Vérifie chaque faille, la cohérence des credentials,
 # et l'absence de mots interdits dans le code source.
 #
@@ -337,7 +337,7 @@ FORBIDDEN_WORDS=(
 )
 
 # Only scan source files (not this test script itself, not the blueprint)
-SCAN_DIRS=("$SITE_DIR/index.html" "$SITE_DIR/admin" "$SITE_DIR/assets" "$SITE_DIR/backup" "$SITE_DIR/robots.txt")
+SCAN_DIRS=("$SITE_DIR/index.html" "$SITE_DIR/admin" "$SITE_DIR/assets/css" "$SITE_DIR/assets/js" "$SITE_DIR/assets/data" "$SITE_DIR/backup" "$SITE_DIR/robots.txt")
 FORENSICS_CLEAN=true
 
 for word in "${FORBIDDEN_WORDS[@]}"; do

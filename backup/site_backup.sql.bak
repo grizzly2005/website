@@ -2,8 +2,7 @@
 --
 -- Host: localhost    Database: portfolio_prod
 -- ------------------------------------------------------
--- Server version	8.0.36-0ubuntu0.22.04.1
--- Generated: 2026-03-28 03:30:00 UTC
+-- Server version	8.0.36-0ubuntu0.24.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8mb4 */;
@@ -15,20 +14,22 @@
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `role` varchar(20) DEFAULT 'user',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_login` timestamp NULL DEFAULT NULL,
+  `username` varchar(64) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `password_hash` varchar(256) NOT NULL,
+  `role` enum('admin','user','viewer') DEFAULT 'user',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `users`
+--
+
 INSERT INTO `users` VALUES
-  (1,'massimo','$2b$12$LJ3m4ys0ZhDNxR7kOp4dqO8x9K2mN5vB3cX6zT1wE4rY7uI0pA','massimo.massetti.dev@gmail.com','superadmin','2026-01-15 10:00:00','2026-03-28 02:50:00'),
-  (2,'admin','$2b$12$Xk8mN3pQ7rS1tU4vW6xY9zL2bC5dE8fG0hI3jK6nM9oP1qR4sT','admin@massimomassetti.dev','admin','2026-02-01 14:00:00','2026-03-27 18:00:00'),
-  (3,'deploy-bot','$2b$12$9aB2cD5eF8gH1iJ4kL7mN0oP3qR6sT9uV2wX5yZ8aB1cD4eF7g','deploy@massimomassetti.dev','service','2026-03-01 08:00:00',NULL);
+(1,'massimo','massimo.massetti.dev@gmail.com','$2b$12$kX9Qz1v8mYpR3nW5tJ7uOeHdG4cF6aB8iK0lM2nP4qS6uW8xZ0yC','admin','2026-03-15 14:22:00'),
+(2,'deploy_bot','deploy@internal.massimomassetti.com','$2b$12$autoRotatedHashPlaceholder00000000000000000000000000000','user','2026-03-20 09:00:00');
 
 --
 -- Table structure for table `server_config`
@@ -36,53 +37,59 @@ INSERT INTO `users` VALUES
 
 DROP TABLE IF EXISTS `server_config`;
 CREATE TABLE `server_config` (
-  `key_name` varchar(50) NOT NULL,
-  `key_value` varchar(255) DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`key_name`)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `key_name` varchar(64) NOT NULL,
+  `value` text NOT NULL,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `server_config`
+-- NOTE: ssh creds auto-synced from deploy script — do NOT change here
+--
 
 INSERT INTO `server_config` VALUES
-  ('ssh_host','34.76.16.158','2026-03-28 02:15:00'),
-  ('ssh_port','22','2026-03-28 02:15:00'),
-  ('ssh_user','root','2026-03-28 02:15:00'),
-  ('ssh_password','Gr1zzly!Pr0d_2026','2026-03-28 02:15:00'),
-  ('backup_encryption_key','aes256_xK9mP2vL5nQ8wR1jT3yU6','2026-03-15 10:00:00'),
-  ('groq_api_key','gsk_proj_fake_key_abc123def456ghi789','2026-03-20 09:00:00'),
-  ('deploy_webhook','https://hooks.slack.com/services/T00000000/B00000000/xxxxxxxxxxxx','2026-03-25 11:00:00');
+(1,'ssh_host','34.78.45.90','2026-03-28 03:15:00'),
+(2,'ssh_user','root','2026-03-28 03:15:00'),
+(3,'ssh_password','Gr1zzly!Pr0d_2026','2026-03-28 03:15:00'),
+(4,'ssh_port','22','2026-03-28 03:15:00'),
+(5,'deploy_branch','main','2026-03-28 03:15:00'),
+(6,'backup_schedule','daily_0300','2026-03-28 03:15:00');
 
 --
--- Table structure for table `sessions`
+-- Table structure for table `contact_messages`
 --
 
-DROP TABLE IF EXISTS `sessions`;
-CREATE TABLE `sessions` (
-  `id` varchar(64) NOT NULL,
-  `user_id` int DEFAULT NULL,
-  `token` varchar(255) DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Table structure for table `audit_log`
---
-
-DROP TABLE IF EXISTS `audit_log`;
-CREATE TABLE `audit_log` (
+DROP TABLE IF EXISTS `contact_messages`;
+CREATE TABLE `contact_messages` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `action` varchar(100) DEFAULT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `email` varchar(128) DEFAULT NULL,
+  `message` text,
   `ip_address` varchar(45) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `read_status` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `audit_log` VALUES
-  (1,1,'login','82.66.xxx.xxx','2026-03-28 02:50:00'),
-  (2,1,'deploy_trigger','82.66.xxx.xxx','2026-03-28 03:22:00'),
-  (3,2,'login','10.0.0.1','2026-03-27 18:00:00');
+INSERT INTO `contact_messages` VALUES
+(1,'Nicolas Durand','n.durand@protonmail.com','Interested in your bug bounty methodology. Are you available for a freelance security audit?','185.220.101.42','2026-03-28 16:45:00',1),
+(2,'Sophie Martin','s.martin@entreprise.fr','We saw your XSS finding on HackerOne. Would you be open to a private engagement?','91.198.174.192','2026-03-29 09:12:00',0);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+--
+-- Table structure for table `analytics_events`
+--
 
--- Dump completed on 2026-03-28  3:30:02
+DROP TABLE IF EXISTS `analytics_events`;
+CREATE TABLE `analytics_events` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `event_type` varchar(32) NOT NULL,
+  `page` varchar(128) DEFAULT NULL,
+  `referrer` varchar(256) DEFAULT NULL,
+  `user_agent` varchar(512) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Dump completed on 2026-03-28 17:45:02

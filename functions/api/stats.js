@@ -1,18 +1,17 @@
 /**
  * Cloudflare Pages Function — Widget Stats Proxy
- * Proxies real HYDRA stats through Cloudflare Tunnel.
+ * Proxies live infrastructure stats through Cloudflare Tunnel.
  *
  * Route: GET /api/stats
  *
- * IMPORTANT: Remplace TUNNEL_URL par l'URL permanente du tunnel.
- * Pour obtenir l'URL : sur la console GCP SSH, lance:
+ * IMPORTANT: Replace TUNNEL_URL with the permanent tunnel URL.
+ * To get the URL, on the GCP SSH console run:
  *   sudo journalctl -u cloudflared | grep "trycloudflare.com" | tail -1
  */
 
 const TUNNEL_URL = "https://widescreen-poetry-auto-viewer.trycloudflare.com";
 
 export async function onRequestGet(context) {
-    // Si le tunnel n'est pas configuré, retourner une erreur claire
     if (TUNNEL_URL === "__TUNNEL_URL__") {
         return new Response(JSON.stringify({
             error: "tunnel_not_configured",
@@ -45,7 +44,6 @@ export async function onRequestGet(context) {
         });
 
     } catch (error) {
-        // Retourner l'erreur exacte (pas de fallback random)
         return new Response(JSON.stringify({
             error: error.message,
             target: target,
