@@ -375,14 +375,15 @@
                     m1.textContent = fmtSessions(d.total_sessions);
                     if (m1l) m1l.textContent = d.total_sessions === 1 ? 'session' : 'sessions';
                 }
-                if (m2 && d.uptime_seconds != null) {
-                    m2.textContent = fmtDays(d.uptime_seconds);
+                if (m2 && d.connections_24h != null) {
+                    m2.textContent = d.connections_24h;
+                    m2.closest('.metric').querySelector('.metric-lbl').textContent = 'hits / 24h';
                 }
             } catch (_) {
                 // API unreachable — show neutral placeholder, never fake numbers
                 if (m1) m1.textContent = 'live';
                 if (m1l) m1l.textContent = 'capture';
-                if (m2) m2.textContent = 'active';
+                if (m2) { m2.textContent = '—'; m2.closest('.metric').querySelector('.metric-lbl').textContent = 'hits / 24h'; }
             }
         }
 
