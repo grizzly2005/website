@@ -1082,6 +1082,47 @@ a:hover {
     border-top: 1px solid var(--border);
 }
 
+/* ═══════════════ LATEST PROJECT CARD ═══════════════ */
+
+.project-latest {
+    border-color: rgba(0, 240, 255, 0.18);
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.025) 0%, var(--bg-card) 60%);
+}
+
+.project-latest:hover {
+    border-color: rgba(0, 240, 255, 0.35);
+}
+
+.project-latest .project-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.latest-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    animation: pulse-latest 3s ease-in-out infinite;
+}
+
+@keyframes pulse-latest {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.15); }
+    50%      { opacity: 0.85; box-shadow: 0 0 0 4px rgba(0, 240, 255, 0); }
+}
+
+.project-latest .metric-val {
+    color: var(--accent);
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
     .project-featured-layout {

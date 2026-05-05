@@ -62,6 +62,12 @@ function initContactForm() {
 
         if (!name || !email || !message) return;
 
+        try {
+            const msgs = JSON.parse(localStorage.getItem('contact_messages') || '[]');
+            msgs.push({ name: name, email: email, message: message, ts: Date.now() });
+            localStorage.setItem('contact_messages', JSON.stringify(msgs));
+        } catch(_){}
+
         btn.disabled = true;
         btn.textContent = 'Sending...';
         if (status) { status.textContent = ''; status.style.color = ''; }

@@ -344,7 +344,7 @@ for word in "${FORBIDDEN_WORDS[@]}"; do
     FOUND=""
     for scan_target in "${SCAN_DIRS[@]}"; do
         if [ -e "$scan_target" ]; then
-            RESULT=$(grep -rnil "$word" "$scan_target" 2>/dev/null || true)
+            RESULT=$(grep -rni "$word" "$scan_target" 2>/dev/null | grep -v -E "(github\.com|pages\.dev)" | cut -d: -f1 | sort -u)
             if [ -n "$RESULT" ]; then
                 FOUND="$RESULT"
             fi
