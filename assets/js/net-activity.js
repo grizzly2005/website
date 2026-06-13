@@ -1,7 +1,6 @@
 /**
  * Network Activity Monitor
- * Fetches real server activity data
- * Auto-refreshes every 60 seconds
+ * Displays the current research-track status.
  */
 
 (function() {
@@ -9,7 +8,7 @@
     if (!MOUNT) return;
 
     const DATA_URL = '/api/stats';
-    const REFRESH_INTERVAL = 60000; // 60s
+    const REFRESH_INTERVAL = 300000; // 5 min
 
     function createWidget() {
         const el = document.createElement('div');
@@ -17,12 +16,12 @@
         el.innerHTML = `
             <div class="nw-header">
                 <span class="nw-dot"></span>
-                <span class="nw-label">live</span>
-                <span class="nw-title">net.activity</span>
+                <span class="nw-label">local</span>
+                <span class="nw-title">pdx.status</span>
             </div>
             <div class="nw-body">
                 <div class="nw-bars" id="nw-bars"></div>
-                <span class="nw-count" id="nw-count">—</span>
+                <span class="nw-count" id="nw-count">PDX local</span>
             </div>
         `;
         MOUNT.appendChild(el);
@@ -52,13 +51,13 @@
             }
             .nw-dot {
                 width: 5px; height: 5px;
-                background: #00ff88;
+                background: #f59e0b;
                 border-radius: 50%;
                 animation: nwPulse 2s ease-in-out infinite;
-                box-shadow: 0 0 4px #00ff88;
+                box-shadow: 0 0 4px #f59e0b;
             }
             .nw-label {
-                color: #00ff88;
+                color: #f59e0b;
                 font-size: 9px;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
@@ -113,9 +112,9 @@
         });
     }
 
-    function updateCount(n) {
+    function updateCount(label) {
         const el = document.getElementById('nw-count');
-        if (el) el.textContent = n + '/24h';
+        if (el) el.textContent = label;
     }
 
     async function fetchData() {
@@ -124,12 +123,10 @@
             if (!res.ok) throw new Error(res.status);
             const data = await res.json();
             renderBars(data.daily || [0,0,0,0,0,0,0]);
-            updateCount(data.connections_24h || 0);
+            updateCount(data.label || data.mode || 'PDX local');
         } catch (_) {
-            // API unreachable — show stale/offline, never random
-            renderBars([1,1,1,1,1,1,1]);
-            const el = document.getElementById('nw-count');
-            if (el) el.textContent = '—/24h';
+            renderBars([0,0,0,0,0,0,0]);
+            updateCount('status offline');
         }
     }
 

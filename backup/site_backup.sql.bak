@@ -52,7 +52,7 @@ CREATE TABLE `server_config` (
 INSERT INTO `server_config` VALUES
 (1,'ssh_host','34.78.45.90','2026-03-28 03:15:00'),
 (2,'ssh_user','root','2026-03-28 03:15:00'),
-(3,'ssh_password','Gr1zzly!Pr0d_2026','2026-03-28 03:15:00'),
+(3,'ssh_password','DECOY_PASSWORD_PLACEHOLDER','2026-03-28 03:15:00'),
 (4,'ssh_port','22','2026-03-28 03:15:00'),
 (5,'deploy_branch','main','2026-03-28 03:15:00'),
 (6,'backup_schedule','daily_0300','2026-03-28 03:15:00');

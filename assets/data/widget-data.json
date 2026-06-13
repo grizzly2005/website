@@ -1,6 +1,9 @@
 {
-  "connections_24h": 8,
-  "daily": [3, 5, 2, 8, 4, 6, 3],
+  "mode": "pdx_local_first",
+  "label": "PDX local",
+  "connections_24h": 0,
+  "daily": [0, 0, 0, 0, 0, 0, 0],
   "active_now": 0,
-  "last_update": "2026-04-04T14:30:00Z"
+  "hydra_vps": "paused",
+  "last_update": "2026-06-13T00:00:00Z"
 }

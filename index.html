@@ -141,10 +141,10 @@
             <h2 class="section-title"><span class="section-num">02</span> Projects</h2>
             <div class="projects-grid">
 
-                <!-- ═══ FEATURED: HYDRA × PIPELINE ═══ -->
+                <!-- ═══ FEATURED: HYDRA × PDX ═══ -->
                 <article class="project-card project-featured" data-reveal>
                     <div class="project-header">
-                        <span class="project-badge">Featured Research</span>
+                        <span class="project-badge">Updated Research Track</span>
                         <div class="project-links">
                             <a href="https://github.com/grizzly2005/hydra-pdx" target="_blank" rel="noopener" aria-label="Source code">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -168,23 +168,27 @@
 
                         <!-- Content -->
                         <div class="project-featured-content">
-                            <h3 class="project-title">HYDRA<span style="color:var(--accent-secondary)">×</span>PIPELINE</h3>
-                            <p class="project-subtitle">Dual-use cybersecurity pipeline</p>
+                            <h3 class="project-title">HYDRA<span style="color:var(--accent-secondary)">×</span>PDX</h3>
+                            <p class="project-subtitle">Burp-first security data pipeline</p>
                             <p class="project-desc">
-                                LLM-powered SSH research system that answers any command in real time with memory and anti-fingerprinting. Deployed on a public VPS and exposed to live internet traffic — caught Kinsing botnets and in-band prompt injection attempts via SSH. The same raw events feed both defensive and offensive training datasets through a dual-use DataRouter with 7 generators.
+                                HYDRA began as an LLM-driven SSH research honeypot. The public VPS is now paused, so the project is documented as an archived research run. The active direction is PDX: a Burp Suite extension and local bridge that convert HTTP request/response deltas into the same structured .pdx format for defensive notes, offensive replay traces and training-data experiments.
                             </p>
                             <div class="project-metrics">
-                                <div class="metric"><span class="metric-val" id="hydra-m1">—</span><span class="metric-lbl" id="hydra-m1l">sessions</span></div>
-                                <div class="metric"><span class="metric-val" id="hydra-m2">—</span><span class="metric-lbl">days live</span></div>
-                                <div class="metric"><span class="metric-val">65+</span><span class="metric-lbl">built-ins</span></div>
+                                <div class="metric"><span class="metric-val">PDX</span><span class="metric-lbl">active focus</span></div>
+                                <div class="metric"><span class="metric-val">16D</span><span class="metric-lbl">delta vector</span></div>
+                                <div class="metric"><span class="metric-val">Burp</span><span class="metric-lbl">extension</span></div>
                                 <div class="metric"><span class="metric-val">7</span><span class="metric-lbl">generators</span></div>
                             </div>
+                            <p class="project-note">
+                                Current positioning: no always-on honeypot dependency. The portfolio now presents the VPS data as a past experiment and PDX as the maintained, local-first workflow.
+                            </p>
                             <div class="project-actions">
                                 <a href="https://hydra-pdx-docs.pages.dev" target="_blank" rel="noopener" class="btn btn-small btn-primary">Read Documentation</a>
+                                <a href="https://hydra-pdx-docs.pages.dev/pdx/burp-bridge/" target="_blank" rel="noopener" class="btn btn-small btn-ghost">Burp Bridge</a>
                                 <a href="https://github.com/grizzly2005/hydra-pdx" target="_blank" rel="noopener" class="btn btn-small btn-ghost">GitHub</a>
                             </div>
                             <div class="project-tags">
-                                <span>Python</span><span>LLM</span><span>Paramiko</span><span>Groq</span><span>Docker</span><span>Unsloth</span><span>LoRA</span><span>Burp Suite</span>
+                                <span>Python</span><span>Java Montoya</span><span>Burp Suite</span><span>.pdx</span><span>DataRouter</span><span>MITRE</span><span>Unsloth</span><span>LoRA</span>
                             </div>
                         </div>
                     </div>
@@ -359,7 +363,7 @@
         <div class="container footer-inner">
             <div class="footer-left">
                 <p>&copy; 2026 Massimo Massetti</p>
-                <p class="footer-meta">Deployed with automated CI/CD · Infrastructure monitored 24/7</p>
+                <p class="footer-meta">Cloudflare Pages · GitHub deploy · PDX research track active</p>
             </div>
             <div class="footer-right">
                 <!-- Widget loaded separately -->
@@ -382,50 +386,6 @@
     }
     scaleDemoFrame();
     window.addEventListener('resize', scaleDemoFrame);
-    // ═══ HYDRA live metrics ═══
-    (function () {
-        const m1 = document.getElementById('hydra-m1');
-        const m1l = document.getElementById('hydra-m1l');
-        const m2 = document.getElementById('hydra-m2');
-
-        function fmtSessions(n) {
-            if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'K+';
-            return n + '';
-        }
-
-        function fmtDays(uptime_s) {
-            const d = Math.floor(uptime_s / 86400);
-            const h = Math.floor((uptime_s % 86400) / 3600);
-            if (d > 0) return d + 'd ' + h + 'h';
-            return h + 'h';
-        }
-
-        async function loadStats() {
-            try {
-                const res = await fetch('/api/stats?t=' + Date.now());
-                if (!res.ok) throw new Error(res.status);
-                const d = await res.json();
-                if (d.error) throw new Error(d.error);
-
-                if (m1 && d.total_sessions != null) {
-                    m1.textContent = fmtSessions(d.total_sessions);
-                    if (m1l) m1l.textContent = d.total_sessions === 1 ? 'session' : 'sessions';
-                }
-                if (m2 && d.connections_24h != null) {
-                    m2.textContent = d.connections_24h;
-                    m2.closest('.metric').querySelector('.metric-lbl').textContent = 'hits / 24h';
-                }
-            } catch (_) {
-                // API unreachable — show neutral placeholder, never fake numbers
-                if (m1) m1.textContent = 'live';
-                if (m1l) m1l.textContent = 'capture';
-                if (m2) { m2.textContent = '—'; m2.closest('.metric').querySelector('.metric-lbl').textContent = 'hits / 24h'; }
-            }
-        }
-
-        loadStats();
-        setInterval(loadStats, 120000); // refresh every 2 min
-    })();
     </script>
     <script>
       (function() {

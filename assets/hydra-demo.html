@@ -42,7 +42,7 @@ window.addEventListener('resize',scaleCanvas);
 
 <!-- ═══ S2 — TITLE + STATS ═══ -->
 <div class="e" id="s2a" style="top:220px;left:0;right:0;text-align:center;font-size:52px;font-weight:700;color:#e2e2ea;letter-spacing:6px">HYDRA <span style="color:#6366f1">×</span> PDX</div>
-<div class="e" id="s2b" style="top:310px;left:0;right:0;text-align:center;font-size:16px;color:#444;letter-spacing:2px">Dual-use pipeline · cybersecurity</div>
+<div class="e" id="s2b" style="top:310px;left:0;right:0;text-align:center;font-size:16px;color:#444;letter-spacing:2px">Burp-first .pdx pipeline · cybersecurity</div>
 <div class="e" id="s2c" style="top:410px;left:100px;right:100px;display:flex;gap:24px;justify-content:center">
   <div class="box" style="flex:1;border:1px solid #1a1a2e;text-align:center;padding:28px">
     <div id="ct1" style="font-size:44px;font-weight:600;color:#6366f1">0</div>
@@ -50,26 +50,26 @@ window.addEventListener('resize',scaleCanvas);
   </div>
   <div class="box" style="flex:1;border:1px solid #1a1a2e;text-align:center;padding:28px">
     <div id="ct2" style="font-size:44px;font-weight:600;color:#6366f1">0</div>
-    <div style="font-size:13px;color:#555;margin-top:6px;letter-spacing:1px">sessions capturées</div>
-    <div style="font-size:11px;color:#333;margin-top:3px;letter-spacing:1px">déploiement initial</div>
+    <div style="font-size:13px;color:#555;margin-top:6px;letter-spacing:1px">archived sessions</div>
+    <div style="font-size:11px;color:#333;margin-top:3px;letter-spacing:1px">VPS paused</div>
   </div>
   <div class="box" style="flex:1;border:1px solid #1a1a2e;text-align:center;padding:28px">
     <div id="ct3" style="font-size:44px;font-weight:600;color:#6366f1">0</div>
     <div style="font-size:13px;color:#555;margin-top:6px;letter-spacing:1px">MITRE tactics</div>
   </div>
 </div>
-<div class="e" id="s2d" style="top:580px;left:0;right:0;text-align:center;font-size:14px;color:#444;letter-spacing:1px">8 data collectors · 7 training generators · Burp Suite extension</div>
+<div class="e" id="s2d" style="top:580px;left:0;right:0;text-align:center;font-size:14px;color:#444;letter-spacing:1px">Burp extension · local bridge · DataRouter · 7 training generators</div>
 
-<!-- ═══ S3 — HYDRA PASSIVE ═══ -->
-<div class="e" id="s3l" style="top:80px;left:80px;font-size:12px;font-weight:600;color:#3b82f6;letter-spacing:3px">PASSIVE SOURCE — SSH HONEYPOT</div>
+<!-- ═══ S3 — HYDRA ARCHIVE ═══ -->
+<div class="e" id="s3l" style="top:80px;left:80px;font-size:12px;font-weight:600;color:#3b82f6;letter-spacing:3px">ARCHIVED SOURCE — HYDRA SSH CORPUS</div>
 <div class="e" id="s3a" style="top:150px;left:100px;width:260px" ><div class="box" style="border:1px solid #ef444455">
-  <div style="font-size:14px;font-weight:600;color:#ef4444;letter-spacing:2px;margin-bottom:8px">ATTACKER</div>
-  <div style="font-size:16px;color:#888">SSH :2222</div>
+  <div style="font-size:14px;font-weight:600;color:#ef4444;letter-spacing:2px;margin-bottom:8px">CAPTURED SESSION</div>
+  <div style="font-size:16px;color:#888">SSH replay</div>
 </div></div>
 <div class="e f" id="s3ar" style="top:200px;left:380px;font-size:28px;color:#ef4444">→</div>
 <div class="e" id="s3h" style="top:130px;left:430px;width:280px"><div class="box" style="border:1px solid #3b82f655">
   <div style="font-size:14px;font-weight:600;color:#3b82f6;letter-spacing:2px;margin-bottom:8px">HYDRA</div>
-  <div style="font-size:15px;color:#888;line-height:1.6">LLM-powered honeypot<br>llama-3.3-70b via Groq<br>Virtual FS · Copy-on-Write</div>
+  <div style="font-size:15px;color:#888;line-height:1.6">Archived honeypot run<br>virtual FS transcripts<br>prompt-injection cases</div>
 </div></div>
 <div class="e" id="s3p" style="top:310px;left:430px;display:flex;gap:10px">
   <div style="font-size:14px;padding:8px 16px;border-radius:8px;background:#a855f722;color:#a855f7;border:1px solid #a855f744">crypto_validator</div>
@@ -130,7 +130,7 @@ window.addEventListener('resize',scaleCanvas);
 </div></div>
 
 <!-- ═══ S6 — OBSERVATIONS ═══ -->
-<div class="e" id="s6l" style="top:80px;left:0;right:0;text-align:center;font-size:12px;font-weight:600;color:#f59e0b;letter-spacing:3px">KEY OBSERVATIONS — LIVE DEPLOYMENT</div>
+<div class="e" id="s6l" style="top:80px;left:0;right:0;text-align:center;font-size:12px;font-weight:600;color:#f59e0b;letter-spacing:3px">KEY OBSERVATIONS — ARCHIVED RUN</div>
 <div class="e" id="s6o1" style="top:170px;left:100px;right:100px"><div class="box" style="border:1px solid #f8717155;border-left:3px solid #f87171">
   <div style="font-size:14px;font-weight:600;color:#f87171;margin-bottom:8px">Kinsing botnet detected</div>
   <div style="font-size:18px;color:#e2e2ea;margin-bottom:6px"><span style="color:#f87171;font-weight:600">148</span> sessions with <span style="color:#f87171">/bin/./uname</span> evasion</div>
@@ -142,9 +142,9 @@ window.addEventListener('resize',scaleCanvas);
   <div style="font-size:13px;color:#666">Scanners specifically hunt for Solana validator nodes — crypto_validator persona attracted them</div>
 </div></div>
 <div class="e" id="s6o3" style="top:570px;left:100px;right:100px"><div class="box" style="border:1px solid #fb923c55;border-left:3px solid #fb923c">
-  <div style="font-size:14px;font-weight:600;color:#fb923c;margin-bottom:8px">Test password leaked into the wild</div>
-  <div style="font-size:18px;color:#e2e2ea;margin-bottom:6px"><span style="color:#fb923c;font-weight:600">Gr1zzly!Pr0d_2026</span> — 3rd most tried password</div>
-  <div style="font-size:13px;color:#666">82 attempts. An internal test credential became a brute-force wordlist entry in days</div>
+  <div style="font-size:14px;font-weight:600;color:#fb923c;margin-bottom:8px">Credential lure propagation</div>
+  <div style="font-size:18px;color:#e2e2ea;margin-bottom:6px"><span style="color:#fb923c;font-weight:600">decoy password</span> — repeated across brute-force attempts</div>
+  <div style="font-size:13px;color:#666">Historical signal only. No real credential is published or reused.</div>
 </div></div>
 <div class="e" id="s6o4" style="top:770px;left:100px;right:100px"><div class="box" style="border:1px solid #3b82f655;border-left:3px solid #3b82f6">
   <div style="font-size:14px;font-weight:600;color:#3b82f6;margin-bottom:8px">Persona effectiveness varies dramatically</div>
@@ -169,11 +169,11 @@ window.addEventListener('resize',scaleCanvas);
 </div>
 
 <!-- ═══ S8 — FEEDBACK + END ═══ -->
-<div class="e" id="s8l" style="top:80px;left:0;right:0;text-align:center;font-size:12px;font-weight:600;color:#22c55e;letter-spacing:3px">CONTINUOUS FEEDBACK LOOP</div>
+<div class="e" id="s8l" style="top:80px;left:0;right:0;text-align:center;font-size:12px;font-weight:600;color:#22c55e;letter-spacing:3px">LOCAL-FIRST FEEDBACK LOOP</div>
 <div class="e" id="s8f" style="top:180px;left:140px;right:140px;text-align:center">
-  <div style="font-size:20px;color:#888;line-height:1.8">feedback.yaml pushed back to HYDRA<br><span style="color:#22c55e;font-weight:500">every 60 seconds</span></div>
-  <div style="font-size:15px;color:#555;margin-top:20px;line-height:1.7">Adjusts active lures · Refines LLM responses<br>Adds new decoy files automatically</div>
-  <div style="margin-top:30px;font-size:22px;color:#22c55e;font-weight:500">The honeypot improves itself. Continuously.</div>
+  <div style="font-size:20px;color:#888;line-height:1.8">Burp captures HTTP deltas<br><span style="color:#22c55e;font-weight:500">without a live VPS dependency</span></div>
+  <div style="font-size:15px;color:#555;margin-top:20px;line-height:1.7">Normalizes findings · Builds replay traces<br>Feeds defensive and offensive datasets</div>
+  <div style="margin-top:30px;font-size:22px;color:#22c55e;font-weight:500">PDX becomes the maintained workbench.</div>
 </div>
 <div class="e" id="s8e" style="top:520px;left:140px;right:140px;text-align:center">
   <div style="font-size:40px;font-weight:700;color:#e2e2ea;ze:15px;color:#666;line-height:1.8;margin-bottom:30px">Open-source · Public dataset · arXiv paper</div>
@@ -196,14 +196,8 @@ const S={s1:['s1a','s1b','s1c'],s2:['s2a','s2b','s2c','s2d'],s3:['s3l','s3a','s3
 function clr(){Object.values(S).flat().forEach(id=>{try{off(id)}catch(e){}})}
 
 async function play(){
-// ── Fetch live stats before starting (silent fallback) ──
-let _liveStats = {};
-try {
-  const _r = await fetch('/api/stats?t='+Date.now());
-  if (_r.ok) _liveStats = await _r.json();
-} catch(_){}
-const _totalSessions = (_liveStats.total_sessions > 0) ? _liveStats.total_sessions : 55;
-const _uptimeDays = _liveStats.uptime_seconds ? Math.floor(_liveStats.uptime_seconds/86400) : null;
+// Static replay values: the public HYDRA instance is paused; PDX is the active track.
+const _totalSessions = 3508;
 
 // S1 — Hook
 clr();await w(800);on('s1a');await w(1200);on('s1b');await w(1200);on('s1c');await w(2800);
@@ -212,11 +206,6 @@ clr();await w(800);on('s1a');await w(1200);on('s1b');await w(1200);on('s1c');awa
 clr();await w(400);on('s2a');await w(600);on('s2b');await w(800);on('s2c');await w(300);
 countUp('ct1',55,1000);
 countUp('ct2',_totalSessions,1500);
-// Update label with uptime if available
-if(_uptimeDays !== null){
-  const lbl=$('ct2').nextElementSibling;
-  if(lbl) lbl.textContent='sessions · '+_uptimeDays+'d live';
-}
 countUp('ct3',5,800);await w(2500);on('s2d');await w(2500);
 
 // S3 — HYDRA

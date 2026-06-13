@@ -24,11 +24,11 @@ WARN_COUNT=0
 
 # ─── Credentials attendus ───
 CRED_PRINCIPAL_USER="root"
-CRED_PRINCIPAL_PASS="Gr1zzly!Pr0d_2026"
+CRED_PRINCIPAL_PASS="DECOY_PASSWORD_PLACEHOLDER"
 CRED_ADMIN_USER="admin"
-CRED_ADMIN_PASS="@dminC0ns0le_01"
+CRED_ADMIN_PASS="ADMIN_PASSWORD_PLACEHOLDER"
 CRED_DEPLOY_USER="deploy"
-CRED_DEPLOY_PASS="D3pl0y_K3y#staging"
+CRED_DEPLOY_PASS="DEPLOY_PASSWORD_PLACEHOLDER"
 SSH_HOST_PLACEHOLDER="[IP_DU_VPS]"
 
 # ─── Colors ───
@@ -312,19 +312,11 @@ for f in "${PRINCIPAL_LOCATIONS[@]}"; do
     fi
 done
 
-# Check admin creds only in admin panel
-if grep -rq "$CRED_ADMIN_PASS" "$SITE_DIR/admin/"; then
-    pass "Admin password found in /admin/"
+# The old lure-style admin credentials were retired in the 2026-06-13 update.
+if grep -rq "$CRED_ADMIN_PASS\|$CRED_DEPLOY_PASS" "$SITE_DIR/admin/" 2>/dev/null; then
+    fail "Retired credential placeholders should not be present in /admin/"
 else
-    fail "Admin password missing from /admin/"
-fi
-
-# Check deploy creds only in JWT
-if grep -q "$CRED_DEPLOY_PASS" "$SITE_DIR/admin/messages.html" 2>/dev/null || \
-   grep -q "D3pl0y" "$SITE_DIR/admin/messages.html" 2>/dev/null; then
-    pass "Deploy password encoded in JWT cookie"
-else
-    warn "Deploy password not found in messages.html (may be base64 encoded — manual check)"
+    pass "No retired admin/deploy credential placeholders in /admin/"
 fi
 
 # ═══════════════ TEST 11: ANTI-FORENSICS ═══════════════
