@@ -93,9 +93,9 @@
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">whoami</span></div>
                 <div class="term-line term-output">massimo — offensive security researcher</div>
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">cat focus.log</span></div>
-                <div class="term-line term-output">bug bounty triage -> evidence-backed reports</div>
+                <div class="term-line term-output">HYDRA -> archived LLM honeypot research run</div>
+                <div class="term-line term-output">PDX -> Burp traffic into structured security deltas</div>
                 <div class="term-line term-output">BELIEF -> local reportability workbench</div>
-                <div class="term-line term-output">PDX -> Burp traffic into structured deltas</div>
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">cat mindset.txt</span></div>
                 <div class="term-line term-output">validate impact, preserve evidence, automate noise away</div>
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cursor">█</span></div>
@@ -110,7 +110,7 @@
             <div class="about-grid">
                 <div class="about-text">
                     <p>Computer Science student at Université de Caen Normandie, focused on offensive cybersecurity and AI systems. Currently working through OffSec's PWK labs in preparation for the OSCP / OSEP path.</p>
-                    <p>I actively hunt vulnerabilities across real-world platforms. Invited to private bug bounty programs on HackerOne and YesWeHack for major French groups in insurance, energy, finance, healthcare, and defense. Reported XSS vulnerabilities at Groupe Les Mousquetaires and session manipulation flaws at fintech companies.</p>
+                    <p>I actively hunt vulnerabilities across real-world platforms. Invited to private bug bounty programs on HackerOne and YesWeHack for major French groups in insurance, energy, finance, healthcare, and defense. Reported XSS vulnerabilities at Groupe Les Mousquetaires and session manipulation flaws at fintech companies. Selected writeups are redacted and focus on methodology, impact validation, and remediation rather than target-specific exploitation details.</p>
                     <p>Simultaneously working as an RLHF expert at Outlier, fine-tuning Large Language Models for alignment and robustness. I build the tooling around the work too: BELIEF for reportability triage, PDX for structured security deltas, and OSCP / OSEP tooling for disciplined local execution.</p>
                 </div>
                 <div class="about-stats">
@@ -157,14 +157,37 @@
 
                     <div class="project-featured-layout">
                         <!-- Animation preview -->
-                        <div class="project-demo-wrap">
+                        <a class="project-demo-wrap" href="/assets/hydra-demo.html" target="_blank" rel="noopener" aria-label="Open HYDRA PDX demo">
                             <div class="project-demo-inner">
-                                <iframe src="/assets/hydra-demo.html" class="project-demo-frame" loading="lazy" scrolling="no" title="HYDRA × PIPELINE demo"></iframe>
+                                <div class="project-demo-frame project-demo-static" aria-hidden="true">
+                                    <div class="demo-static-panel">
+                                        <div class="demo-static-kicker">controlled deception layer</div>
+                                        <div class="demo-static-title">HYDRA / PDX</div>
+                                        <div class="demo-static-flow">
+                                            <div class="demo-static-node">
+                                                <strong>Visitor / Bot</strong>
+                                                <span>scanner signal</span>
+                                            </div>
+                                            <div class="demo-static-node">
+                                                <strong>Decoy surface</strong>
+                                                <span>safe exposure</span>
+                                            </div>
+                                            <div class="demo-static-node">
+                                                <strong>Telemetry</strong>
+                                                <span>HYDRA-style events</span>
+                                            </div>
+                                            <div class="demo-static-node">
+                                                <strong>PDX</strong>
+                                                <span>structured deltas</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project-demo-overlay" onclick="window.open('/assets/hydra-demo.html','_blank')">
-                                <span class="demo-play">▶ Watch demo</span>
+                            <div class="project-demo-overlay">
+                                <span class="demo-play">Open demo</span>
                             </div>
-                        </div>
+                        </a>
 
                         <!-- Content -->
                         <div class="project-featured-content">
@@ -291,7 +314,7 @@
                     </div>
                     <h3 class="project-title">Security Lab Infrastructure</h3>
                     <p class="project-desc">
-                        Custom-built environment for exploit development and advanced security research. Covers shellcode and buffer overflow development, automated recon workflows, DPAPI credential extraction, and AES/XOR-based evasion techniques.
+                        Custom local lab for exploit development and defensive validation: memory corruption basics, controlled credential-protection experiments, Windows internals, detection notes, and malware-analysis-safe evasion research.
                     </p>
                     <div class="project-tags">
                         <span>Python</span><span>C</span><span>PyCryptodome</span><span>MinGW</span>
@@ -419,7 +442,7 @@
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/net-activity.js"></script>
     <script>
-    // ═══ Demo frame — dynamic scale ═══
+    // ═══ Demo preview — dynamic scale ═══
     function scaleDemoFrame() {
         const wrap = document.querySelector('.project-demo-wrap');
         const inner = document.querySelector('.project-demo-inner');
@@ -435,13 +458,6 @@
         var btn = document.getElementById('themeToggle');
         if (!btn) return;
 
-        function notifyIframes(theme) {
-          var frames = document.querySelectorAll('iframe');
-          frames.forEach(function(f) {
-            try { f.contentWindow.postMessage({type:'theme-change',theme:theme},'*'); } catch(_){}
-          });
-        }
-
         btn.addEventListener('click', function() {
           var current = document.documentElement.getAttribute('data-theme');
           var next = current === 'light' ? 'dark' : 'light';
@@ -451,13 +467,6 @@
             document.documentElement.removeAttribute('data-theme');
           }
           localStorage.setItem('theme', next);
-          notifyIframes(next);
-        });
-
-        // Also notify iframes on initial load if theme is light
-        window.addEventListener('load', function() {
-          var theme = document.documentElement.getAttribute('data-theme');
-          if (theme === 'light') notifyIframes('light');
         });
       })();
     </script>

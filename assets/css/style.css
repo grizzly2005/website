@@ -1072,12 +1072,15 @@ a:hover {
 
 .project-demo-wrap {
     position: relative;
+    display: block;
     width: 320px;
     aspect-ratio: 1;
     overflow: hidden;
     border-right: 1px solid var(--border);
     cursor: pointer;
     flex-shrink: 0;
+    color: inherit;
+    text-decoration: none;
 }
 
 .project-demo-inner {
@@ -1092,6 +1095,93 @@ a:hover {
     height: 1080px;
     border: none;
     background: #08080e;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-demo-static {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 72px;
+    background:
+        linear-gradient(135deg, rgba(0, 240, 255, 0.16), transparent 32%),
+        linear-gradient(315deg, rgba(0, 255, 136, 0.14), transparent 34%),
+        #08080e;
+}
+
+.project-demo-static::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 72px 72px;
+}
+
+.demo-static-panel {
+    position: relative;
+    width: 100%;
+    min-height: 720px;
+    border: 2px solid rgba(0, 240, 255, 0.34);
+    background: rgba(8, 8, 14, 0.82);
+    padding: 64px;
+    box-shadow: inset 0 0 0 1px rgba(0, 255, 136, 0.12);
+}
+
+.demo-static-kicker {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0;
+    margin-bottom: 24px;
+}
+
+.demo-static-title {
+    font-family: var(--font-display);
+    font-size: 72px;
+    line-height: 1;
+    color: var(--text);
+    letter-spacing: 0;
+    margin-bottom: 72px;
+}
+
+.demo-static-flow {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.demo-static-node {
+    min-height: 260px;
+    border: 2px solid rgba(0, 240, 255, 0.25);
+    background: rgba(0, 240, 255, 0.06);
+    padding: 32px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.demo-static-node strong,
+.demo-static-node span {
+    display: block;
+    letter-spacing: 0;
+}
+
+.demo-static-node strong {
+    font-family: var(--font-display);
+    font-size: 34px;
+    line-height: 1.12;
+    color: var(--text);
+}
+
+.demo-static-node span {
+    font-family: var(--font-mono);
+    font-size: 21px;
+    line-height: 1.35;
+    color: var(--text-secondary);
 }
 
 .project-demo-overlay {

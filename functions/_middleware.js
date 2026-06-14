@@ -6,6 +6,22 @@
  * Automatically runs on every request through Cloudflare Pages Functions
  */
 
+const SECURITY_HEADERS = {
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'X-Frame-Options': 'DENY',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+    'Content-Security-Policy': "default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data: https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+};
+
+function applySecurityHeaders(headers) {
+    for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+        headers.set(name, value);
+    }
+    headers.set('X-Request-ID', crypto.randomUUID());
+    return headers;
+}
+
 export async function onRequest(context) {
     const url = new URL(context.request.url);
 
@@ -26,7 +42,7 @@ export async function onRequest(context) {
     ) {
         return new Response('Not found', {
             status: 404,
-            headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+            headers: applySecurityHeaders(new Headers({ 'Content-Type': 'text/plain; charset=utf-8' }))
         });
     }
 
@@ -36,10 +52,7 @@ export async function onRequest(context) {
     const newResponse = new Response(response.body, response);
 
     // Keep headers boring and production-like.
-    newResponse.headers.set('X-Content-Type-Options', 'nosniff');
-    newResponse.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-    newResponse.headers.set('X-Frame-Options', 'SAMEORIGIN');
-    newResponse.headers.set('X-Request-ID', crypto.randomUUID());
+    applySecurityHeaders(newResponse.headers);
 
     // Remove Cloudflare-specific headers that would reveal the real host
     newResponse.headers.delete('cf-ray');
