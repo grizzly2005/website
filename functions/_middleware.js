@@ -9,8 +9,9 @@
 export async function onRequest(context) {
     const url = new URL(context.request.url);
 
-    // The portfolio is no longer used as a live lure surface. Do not serve
-    // backup files, local build cache, or fake .git artifacts from Pages.
+    // Keep legacy static bait paths closed. The current deception story uses
+    // controlled API-level decoys only, not public admin, backup, or secret
+    // looking files that could be mistaken for real operational exposure.
     if (
         url.pathname === '/.git' ||
         url.pathname.startsWith('/.git/') ||
