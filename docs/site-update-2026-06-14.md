@@ -3,7 +3,7 @@
 ## Context
 
 The portfolio now highlights BELIEF as an active public project alongside the
-HYDRA/PDX track and OSCP Toolkit.
+HYDRA/PDX track and OSCP / OSEP Toolkit.
 
 Source repository:
 
@@ -13,7 +13,7 @@ Source repository:
 
 - Added a BELIEF v4 project card near the top of the Projects section.
 - Kept HYDRA/PDX as the featured research track.
-- Kept OSCP Toolkit visible as an active local pentest workspace.
+- Kept OSCP / OSEP Toolkit visible as an active local pentest workspace.
 - Moved Security Lab Infrastructure lower in the project grid and marked it as
   in progress.
 - Updated the hero copy and terminal text to emphasize AppSec triage, BELIEF,

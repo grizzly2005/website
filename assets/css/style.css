@@ -300,7 +300,7 @@ a:hover {
 }
 
 .hero::after {
-    content: 'BELIEF / PDX / OSCP / BUG BOUNTY';
+    content: 'BELIEF / PDX / OSCP / OSEP / BUG BOUNTY';
     position: absolute;
     left: 24px;
     right: 24px;
