@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Massimo Massetti — Offensive Security & AI Systems</title>
-    <meta name="description" content="Offensive security researcher and bug bounty hunter. OSCP candidate, active on HackerOne & YesWeHack. Building AI-driven security tools.">
+    <meta name="description" content="Offensive security researcher and AppSec tooling builder. OSCP candidate, bug bounty hunter, and creator of BELIEF, PDX, and local-first security workflows.">
     <meta name="author" content="Massimo Massetti">
     <meta name="theme-color" content="#0a0a0f">
 
@@ -76,7 +76,7 @@
                 <span class="hero-line" data-delay="1">Massetti</span>
             </h1>
             <p class="hero-title">Offensive Security <span class="amp">&</span> AI Systems</p>
-            <p class="hero-sub">I break systems, analyze AI behavior, and build tools for real-world exploitation.</p>
+            <p class="hero-sub">I turn offensive research, AppSec triage, and AI systems into local-first security tools.</p>
             <div class="hero-cta">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
                 <a href="#contact" class="btn btn-ghost">Get in touch</a>
@@ -92,12 +92,12 @@
             <div class="terminal-body" id="hero-terminal-body">
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">whoami</span></div>
                 <div class="term-line term-output">massimo — offensive security researcher</div>
-                <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">cat achievements.log</span></div>
-                <div class="term-line term-output">XSS on major French retail group</div>
-                <div class="term-line term-output">private bug bounty programs (finance, energy, defense)</div>
-                <div class="term-line term-output">AI security research — LLM behavior &amp; alignment</div>
+                <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">cat focus.log</span></div>
+                <div class="term-line term-output">bug bounty triage -> evidence-backed reports</div>
+                <div class="term-line term-output">BELIEF v4 -> local reportability layer</div>
+                <div class="term-line term-output">PDX -> Burp traffic into structured deltas</div>
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">cat mindset.txt</span></div>
-                <div class="term-line term-output">think like attacker · build like engineer · automate everything</div>
+                <div class="term-line term-output">validate impact, preserve evidence, automate noise away</div>
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cursor">█</span></div>
             </div>
         </div>
@@ -111,7 +111,7 @@
                 <div class="about-text">
                     <p>Computer Science student at Université de Caen Normandie, focused on offensive cybersecurity and AI systems. Currently working through OffSec's PWK labs in preparation for the OSCP certification.</p>
                     <p>I actively hunt vulnerabilities across real-world platforms. Invited to private bug bounty programs on HackerOne and YesWeHack for major French groups in insurance, energy, finance, healthcare, and defense. Reported XSS vulnerabilities at Groupe Les Mousquetaires and session manipulation flaws at fintech companies.</p>
-                    <p>Simultaneously working as an RLHF expert at Outlier, fine-tuning Large Language Models for alignment and robustness. I don't just find vulnerabilities — I build systems to find them faster.</p>
+                    <p>Simultaneously working as an RLHF expert at Outlier, fine-tuning Large Language Models for alignment and robustness. I build the tooling around the work too: BELIEF for reportability triage, PDX for structured security deltas, and OSCP tooling for disciplined local execution.</p>
                 </div>
                 <div class="about-stats">
                     <div class="stat-card">
@@ -127,8 +127,8 @@
                         <span class="stat-label">Languages spoken</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-value">RLHF</span>
-                        <span class="stat-label">AI Expert @ Outlier</span>
+                        <span class="stat-value">BELIEF</span>
+                        <span class="stat-label">AppSec Triage Engine</span>
                     </div>
                 </div>
             </div>
@@ -194,6 +194,41 @@
                     </div>
                 </article>
 
+                <!-- ═══ BELIEF: APPSEC REPORTABILITY LAYER ═══ -->
+                <article class="project-card project-belief" data-reveal>
+                    <div class="project-header">
+                        <div class="project-header-left">
+                            <span class="project-icon project-icon-text">B4</span>
+                            <span class="project-status-badge">Active AppSec Tooling</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/grizzly2005/belief" target="_blank" rel="noopener" aria-label="Source code">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 class="project-title">BELIEF v4</h3>
+                    <p class="project-subtitle">Local reportability layer for AppSec and bug bounty triage</p>
+                    <p class="project-desc">
+                        Experimental offline engine that turns scanner, PDX, and static-analysis signals into evidence-backed audit cases. It scores reportability conservatively, tracks defensive guarantees, applies exact-case feedback, and exports JSON, SARIF, Markdown, and dataset-ready examples for human review.
+                    </p>
+                    <div class="project-metrics">
+                        <div class="metric"><span class="metric-val">403</span><span class="metric-lbl">tests</span></div>
+                        <div class="metric"><span class="metric-val">44</span><span class="metric-lbl">security</span></div>
+                        <div class="metric"><span class="metric-val">PDX</span><span class="metric-lbl">adapter</span></div>
+                        <div class="metric"><span class="metric-val">SARIF</span><span class="metric-lbl">export</span></div>
+                    </div>
+                    <p class="project-note">
+                        BELIEF is not an exploit generator or auto-submitter. It is a conservative local workbench for deciding what is reportable, protected by guards, likely false positive, weak signal, or still needs manual validation.
+                    </p>
+                    <div class="project-actions">
+                        <a href="https://github.com/grizzly2005/belief" target="_blank" rel="noopener" class="btn btn-small btn-primary">GitHub</a>
+                    </div>
+                    <div class="project-tags">
+                        <span>Python</span><span>AppSec</span><span>Bug Bounty</span><span>PDX</span><span>Semgrep</span><span>CodeQL</span><span>SARIF</span><span>Z3</span>
+                    </div>
+                </article>
+
                 <!-- ═══ LATEST: OSCP Toolkit ═══ -->
                 <article class="project-card project-latest" data-reveal>
                     <div class="project-header">
@@ -229,10 +264,25 @@
                     </div>
                 </article>
 
+                <article class="project-card" data-reveal>
+                    <div class="project-header">
+                        <span class="project-icon">🏴‍☠️</span>
+                    </div>
+                    <h3 class="project-title">Bug Bounty Hunting</h3>
+                    <p class="project-desc">
+                        Active hunter on HackerOne &amp; YesWeHack with access to private programs across insurance, energy, finance, healthcare, and defense sectors. Identified stored XSS at Groupe Les Mousquetaires and session manipulation flaws at fintech companies. Methodology: recon, automation, manual exploitation, impact validation.
+                    </p>
+                    <div class="project-tags">
+                        <span>XSS</span><span>SQLi</span><span>Session</span><span>IDOR</span><span>CWE</span>
+                    </div>
+                </article>
+
                 <article class="project-card project-coming-soon" data-reveal>
                     <div class="project-header">
-                        <span class="project-icon">🧪</span>
-                        <span class="coming-soon-badge">Coming Soon</span>
+                        <div class="project-header-left">
+                            <span class="project-icon project-icon-text">LAB</span>
+                            <span class="coming-soon-badge">In Progress</span>
+                        </div>
                         <div class="project-links">
                             <a href="https://github.com/grizzly2005" target="_blank" rel="noopener" aria-label="Source code">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -245,19 +295,6 @@
                     </p>
                     <div class="project-tags">
                         <span>Python</span><span>C</span><span>PyCryptodome</span><span>MinGW</span>
-                    </div>
-                </article>
-
-                <article class="project-card" data-reveal>
-                    <div class="project-header">
-                        <span class="project-icon">🏴‍☠️</span>
-                    </div>
-                    <h3 class="project-title">Bug Bounty Hunting</h3>
-                    <p class="project-desc">
-                        Active hunter on HackerOne &amp; YesWeHack with access to private programs across insurance, energy, finance, healthcare, and defense sectors. Identified stored XSS at Groupe Les Mousquetaires and session manipulation flaws at fintech companies. Methodology: recon, automation, manual exploitation, impact validation.
-                    </p>
-                    <div class="project-tags">
-                        <span>XSS</span><span>SQLi</span><span>Session</span><span>IDOR</span><span>CWE</span>
                     </div>
                 </article>
 
@@ -277,6 +314,7 @@
                         <span class="skill-tag">Active Directory</span>
                         <span class="skill-tag">Vulnerability Research</span>
                         <span class="skill-tag">Bug Bounty</span>
+                        <span class="skill-tag">Reportability Triage</span>
                         <span class="skill-tag">OWASP Top 10</span>
                         <span class="skill-tag">Network Security</span>
                     </div>
@@ -291,6 +329,7 @@
                         <span class="skill-tag">PHP</span>
                         <span class="skill-tag">SQL</span>
                         <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">Static Analysis</span>
                     </div>
                 </div>
                 <div class="skill-group">
@@ -301,6 +340,9 @@
                         <span class="skill-tag">Metasploit</span>
                         <span class="skill-tag">Wireshark</span>
                         <span class="skill-tag">Nmap</span>
+                        <span class="skill-tag">Semgrep</span>
+                        <span class="skill-tag">CodeQL</span>
+                        <span class="skill-tag">SARIF</span>
                         <span class="skill-tag">Docker</span>
                         <span class="skill-tag">Git</span>
                     </div>
@@ -313,6 +355,7 @@
                         <span class="skill-tag">Model Alignment</span>
                         <span class="skill-tag">Fine-tuning</span>
                         <span class="skill-tag">Adversarial Testing</span>
+                        <span class="skill-tag">PDX Deltas</span>
                     </div>
                 </div>
             </div>
