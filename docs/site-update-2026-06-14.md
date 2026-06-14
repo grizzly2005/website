@@ -11,7 +11,7 @@ Source repository:
 
 ## What changed
 
-- Added a BELIEF v4 project card near the top of the Projects section.
+- Added a BELIEF project card near the top of the Projects section.
 - Kept HYDRA/PDX as the featured research track.
 - Kept OSCP / OSEP Toolkit visible as an active local pentest workspace.
 - Moved Security Lab Infrastructure lower in the project grid and marked it as
@@ -25,10 +25,14 @@ Source repository:
 
 ## BELIEF positioning
 
-BELIEF is presented as a local reportability layer for AppSec and bug bounty
+BELIEF is presented as a local reportability workbench for AppSec and bug bounty
 triage. It turns scanner, PDX, and static-analysis signals into evidence-backed
 audit cases, conservative reportability labels, feedback loops, and exportable
 JSON/SARIF/Markdown/dataset outputs.
+
+The public card avoids unverified benchmark or test-count claims. It presents
+workflow capabilities only: local triage, PDX intake, SARIF export, and human
+review.
 
 The site explicitly avoids presenting BELIEF as an exploit generator,
 autonomous scanner, or bug bounty auto-submitter.

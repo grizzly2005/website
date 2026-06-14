@@ -94,7 +94,7 @@
                 <div class="term-line term-output">massimo — offensive security researcher</div>
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">cat focus.log</span></div>
                 <div class="term-line term-output">bug bounty triage -> evidence-backed reports</div>
-                <div class="term-line term-output">BELIEF v4 -> local reportability layer</div>
+                <div class="term-line term-output">BELIEF -> local reportability workbench</div>
                 <div class="term-line term-output">PDX -> Burp traffic into structured deltas</div>
                 <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">cat mindset.txt</span></div>
                 <div class="term-line term-output">validate impact, preserve evidence, automate noise away</div>
@@ -198,8 +198,8 @@
                 <article class="project-card project-belief" data-reveal>
                     <div class="project-header">
                         <div class="project-header-left">
-                            <span class="project-icon project-icon-text">B4</span>
-                            <span class="project-status-badge">Active AppSec Tooling</span>
+                            <span class="project-icon project-icon-text">B</span>
+                            <span class="project-status-badge">Public AppSec Tooling</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/grizzly2005/belief" target="_blank" rel="noopener" aria-label="Source code">
@@ -207,19 +207,19 @@
                             </a>
                         </div>
                     </div>
-                    <h3 class="project-title">BELIEF v4</h3>
-                    <p class="project-subtitle">Local reportability layer for AppSec and bug bounty triage</p>
+                    <h3 class="project-title">BELIEF</h3>
+                    <p class="project-subtitle">Local reportability workbench for AppSec triage</p>
                     <p class="project-desc">
-                        Experimental offline engine that turns scanner, PDX, and static-analysis signals into evidence-backed audit cases. It scores reportability conservatively, tracks defensive guarantees, applies exact-case feedback, and exports JSON, SARIF, Markdown, and dataset-ready examples for human review.
+                        Offline tool for turning scanner output, PDX deltas, and static-analysis findings into evidence-backed audit cases. The focus is conservative triage: what looks reportable, what is protected by guards, what is probably noise, and what still needs manual validation.
                     </p>
                     <div class="project-metrics">
-                        <div class="metric"><span class="metric-val">403</span><span class="metric-lbl">tests</span></div>
-                        <div class="metric"><span class="metric-val">44</span><span class="metric-lbl">security</span></div>
-                        <div class="metric"><span class="metric-val">PDX</span><span class="metric-lbl">adapter</span></div>
-                        <div class="metric"><span class="metric-val">SARIF</span><span class="metric-lbl">export</span></div>
+                        <div class="metric"><span class="metric-val">Local</span><span class="metric-lbl">offline triage</span></div>
+                        <div class="metric"><span class="metric-val">PDX</span><span class="metric-lbl">signal intake</span></div>
+                        <div class="metric"><span class="metric-val">SARIF</span><span class="metric-lbl">interop export</span></div>
+                        <div class="metric"><span class="metric-val">Review</span><span class="metric-lbl">human decision</span></div>
                     </div>
                     <p class="project-note">
-                        BELIEF is not an exploit generator or auto-submitter. It is a conservative local workbench for deciding what is reportable, protected by guards, likely false positive, weak signal, or still needs manual validation.
+                        BELIEF is not an exploit generator or auto-submitter. It keeps the decision loop local and human-reviewed, with exports for JSON, SARIF, Markdown, and dataset-ready examples when the evidence is worth keeping.
                     </p>
                     <div class="project-actions">
                         <a href="https://github.com/grizzly2005/belief" target="_blank" rel="noopener" class="btn btn-small btn-primary">GitHub</a>
